@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import ModelSpaceGrid from "../components/Home/ModelSpaceGrid";
 
+const BASE_URL = import.meta.env.VITE_BACKEND_BASE_URL;
+
 const Home = () => {
   const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
@@ -13,9 +15,7 @@ const Home = () => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const response = await axios.get(
-          "https://frontend-assignment-api.misc.simplismart.ai/model-spaces"
-        );
+        const response = await axios.get(`${BASE_URL}/model-spaces`);
         setData(response.data.data);
         setFilteredData(response.data.data);
       } catch (err) {

@@ -4,6 +4,8 @@ import { useParams } from "react-router-dom";
 import ModelCard from "../components/ModelSpace/ModelCard";
 import ModelForm from "../components/ModelSpace/ModelForm";
 
+const BASE_URL = import.meta.env.VITE_BACKEND_BASE_URL;
+
 const ModelSpace = () => {
   const { modelId } = useParams();
 
@@ -15,9 +17,7 @@ const ModelSpace = () => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const response = await axios.get(
-          `https://frontend-assignment-api.misc.simplismart.ai/model-spaces/${modelId}`
-        );
+        const response = await axios.get(`${BASE_URL}/model-spaces/${modelId}`);
         setData(response.data.data);
       } catch (err) {
         setError("An error occurred while fetching the data.");

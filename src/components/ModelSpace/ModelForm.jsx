@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 
+const BASE_URL = import.meta.env.VITE_BACKEND_BASE_URL;
+
 const ModelForm = ({ inputs, outputs, modelId }) => {
   const { register, handleSubmit, reset, getValues } = useForm();
   const [outputData, setOutputData] = useState(null);
@@ -51,7 +53,7 @@ const ModelForm = ({ inputs, outputs, modelId }) => {
     setOutputData(null); // Clear previous output data
     try {
       const response = await axios.post(
-        `https://frontend-assignment-api.misc.simplismart.ai/model-spaces/${modelId}/predict`,
+        `${BASE_URL}/model-spaces/${modelId}/predict`,
         processedData
       );
       setOutputData(response.data.data);
