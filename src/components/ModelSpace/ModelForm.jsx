@@ -3,18 +3,55 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 
 const ModelForm = ({ inputs, outputs, modelId }) => {
-  const { register, handleSubmit, reset } = useForm();
+  const { register, handleSubmit, reset, getValues } = useForm();
   const [outputData, setOutputData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
+  const convertToBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onloadend = () => resolve(reader.result);
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+  };
+
+  const processFormData = async (formData) => {
+    const processedData = { ...formData };
+
+    // Convert number inputs to numbers
+    inputs.forEach((input) => {
+      if (input.type === "number") {
+        processedData[input.name] = Number(processedData[input.name]);
+      }
+    });
+
+    // Convert image/audio files to base64
+    const fileInputs = inputs.filter(
+      (input) => input.type === "image" || input.type === "audio"
+    );
+    for (const input of fileInputs) {
+      const file = getValues(input.name)?.[0];
+      if (file) {
+        const base64 = await convertToBase64(file);
+        processedData[input.name] = base64;
+      }
+    }
+
+    return processedData;
+  };
+
   const onSubmit = async (formData) => {
+    const processedData = await processFormData(formData);
+    console.log(processedData);
+
     setLoading(true);
     setError(null);
     try {
       const response = await axios.post(
-        `https://frontend-assignment-api.misc.simplismart.ai/model-spaces/${modelId}/generate`,
-        formData
+        `https://frontend-assignment-api.misc.simplismart.ai/model-spaces/${modelId}/predict`,
+        processedData
       );
       setOutputData(response.data.data);
     } catch (err) {
@@ -33,13 +70,25 @@ const ModelForm = ({ inputs, outputs, modelId }) => {
               <label htmlFor={input.name}>{input.name}</label>
               <input
                 id={input.name}
-                type={input.type === "image" ? "file" : input.type}
-                accept={input.type === "image" ? "image/*" : ""}
-                defaultValue={input.default || ""}
+                type={
+                  input.type === "image"
+                    ? "file"
+                    : input.type === "audio"
+                    ? "file"
+                    : input.type
+                }
+                accept={
+                  input.type === "image"
+                    ? "image/*"
+                    : input.type === "audio"
+                    ? "audio/*"
+                    : ""
+                }
+                defaultValue={input.default ?? ""}
                 {...register(input.name, { required: input.required })}
                 className="form-control"
               />
-              <p>{input.description}</p>
+              <p className="input-description">{input.description}</p>
             </div>
           ))}
           <button type="submit" className="submit-btn">
@@ -67,6 +116,12 @@ const ModelForm = ({ inputs, outputs, modelId }) => {
                     src={outputData[output.name]}
                     alt={output.name}
                     className="output-image"
+                  />
+                ) : output.type === "audio" ? (
+                  <audio
+                    controls
+                    src={outputData[output.name]}
+                    className="output-audio"
                   />
                 ) : null}
               </div>
