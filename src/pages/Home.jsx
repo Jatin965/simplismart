@@ -5,11 +5,12 @@ import ModelSpaceGrid from "../components/ModelSpaceGrid";
 const Home = () => {
   const [data, setData] = useState();
   const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
+        setLoading(true);
         const response = await axios.get(
           "https://frontend-assignment-api.misc.simplismart.ai/model-spaces"
         );
@@ -24,7 +25,6 @@ const Home = () => {
     fetchData();
   }, []);
 
-  console.log("data", data);
   return (
     <div className="home">
       <div className="home-container">
