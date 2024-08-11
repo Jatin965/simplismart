@@ -32,7 +32,7 @@ const ModelSpace = () => {
   return (
     <div className="model-space">
       <div className="model-space-container">
-        {loading && <p>Loading...</p>}
+        {loading && <div className="loader model-loader"></div>}
         {error && <p className="error">{error}</p>}
         {data && (
           <div className="model-space-content">
