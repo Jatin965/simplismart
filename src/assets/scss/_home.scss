@@ -4,6 +4,16 @@
     margin: 0 auto;
 
     .home-content {
+      .home-loader {
+        margin-top: 45vh;
+      }
+
+      .error-message {
+        color: red;
+        text-align: center;
+        margin-top: 45vh;
+      }
+
       .model-space-grid {
         display: flex;
         flex-wrap: wrap;
@@ -58,6 +68,7 @@
         display: -webkit-box;
         overflow: hidden;
         text-overflow: ellipsis;
+        line-clamp: 3;
         -webkit-line-clamp: 3;
         -webkit-box-orient: vertical;
       }

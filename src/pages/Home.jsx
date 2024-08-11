@@ -29,10 +29,21 @@ const Home = () => {
     <div className="home">
       <div className="home-container">
         <div className="home-content">
-          <div className="head">
-            <h1>Home</h1>
-          </div>
-          <ModelSpaceGrid data={data} />
+          {loading && <div className="loader home-loader"></div>}
+
+          {!loading && error && <p className="error-message">{error}</p>}
+
+          {!loading && !error && data && (
+            <>
+              <div className="head">
+                <h1>Home</h1>
+              </div>
+              <ModelSpaceGrid data={data} />{" "}
+            </>
+          )}
+          {!loading && !error && !data && (
+            <p className="error-message">No data available.</p>
+          )}
         </div>
       </div>
     </div>
