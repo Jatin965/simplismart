@@ -122,6 +122,12 @@
 
         .error {
           color: red;
+          text-align: center;
+          margin-top: 28vh;
+        }
+
+        .output-loader {
+          margin-top: 28vh;
         }
 
         .output-group {
@@ -150,7 +156,32 @@
             object-fit: contain;
           }
         }
+
+        .fallback {
+          text-align: center;
+          margin-top: 28vh;
+        }
       }
     }
+  }
+}
+
+// Loader
+.loader {
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  border-left-color: $theme-blue;
+  border-radius: 50%;
+  width: 2rem;
+  height: 2rem;
+  animation: spin 1s linear infinite;
+  margin: 2rem auto;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }

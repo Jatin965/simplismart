@@ -48,6 +48,7 @@ const ModelForm = ({ inputs, outputs, modelId }) => {
 
     setLoading(true);
     setError(null);
+    setOutputData(null); // Clear previous output data
     try {
       const response = await axios.post(
         `https://frontend-assignment-api.misc.simplismart.ai/model-spaces/${modelId}/predict`,
@@ -91,16 +92,16 @@ const ModelForm = ({ inputs, outputs, modelId }) => {
               <p className="input-description">{input.description}</p>
             </div>
           ))}
-          <button type="submit" className="submit-btn">
+          <button type="submit" disabled={loading} className="submit-btn">
             {loading ? "Generating..." : "Generate"}
           </button>
         </form>
       </div>
 
       <div className="model-output">
-        {loading && <p>Loading...</p>}
-        {error && <p className="error">{error}</p>}
-        {outputData && (
+        {loading && <div className="loader output-loader"></div>}
+        {!loading && error && <p className="error">{error}</p>}
+        {!loading && !error && outputData && (
           <div>
             {outputs.map((output) => (
               <div key={output.name} className="output-group">
@@ -127,6 +128,11 @@ const ModelForm = ({ inputs, outputs, modelId }) => {
               </div>
             ))}
           </div>
+        )}
+        {!loading && !error && !outputData && (
+          <p className="fallback">
+            Your output will be visible here. Please submit the form.
+          </p>
         )}
       </div>
     </div>
