@@ -10,9 +10,12 @@ const ModelSpaceGrid = ({ data }) => {
   };
   return (
     <div className="model-space-grid" onClick={cardClickHandler}>
-      {data?.map((modelSpace) => (
-        <ModelSpaceCard key={modelSpace.id} modelSpace={modelSpace} />
-      ))}
+      <h3>Model Spaces</h3>
+      <div className="card-wrapper">
+        {data?.map((modelSpace) => (
+          <ModelSpaceCard key={modelSpace.id} modelSpace={modelSpace} />
+        ))}
+      </div>
     </div>
   );
 };
