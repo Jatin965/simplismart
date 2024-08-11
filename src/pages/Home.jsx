@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import ModelSpaceGrid from "../components/ModelSpaceGrid";
+import ModelSpaceGrid from "../components/Home/ModelSpaceGrid";
 
 const Home = () => {
   const [data, setData] = useState();

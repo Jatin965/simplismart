@@ -1,0 +1,47 @@
+.model-space {
+  &-container {
+    max-width: 1280px;
+    margin: 30px auto;
+
+    .model-card {
+      background: $theme-card;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      color: $theme-text-white;
+      cursor: pointer;
+      border: 1px solid black;
+      transition: all 0.3s ease;
+      &-container {
+        display: flex;
+        align-items: flex-start;
+        gap: 2rem;
+
+        .img-wrapper {
+          background-color: $theme-black;
+          border-radius: 0.5rem;
+          height: 5.75rem;
+          img {
+            width: 5.75rem;
+            object-fit: cover;
+            border-radius: 0.5rem;
+          }
+        }
+
+        .model-details {
+          h2 {
+            margin: 0;
+            font-weight: 600;
+            color: $theme-white;
+          }
+          p {
+            display: -webkit-box;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+          }
+        }
+      }
+    }
+  }
+}

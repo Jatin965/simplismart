@@ -1,5 +1,5 @@
 import React from "react";
-import BlockedImg from "../assets/ms3.jpg";
+import BlockedImg from "../../assets/ms3.jpg";
 
 const ModelSpaceCard = ({ modelSpace }) => {
   return (

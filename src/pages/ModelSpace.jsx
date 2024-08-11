@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import ModelCard from "../components/ModelSpace/ModelCard";
+import ModelForm from "../components/ModelSpace/ModelForm";
 
 const ModelSpace = () => {
   const { modelId } = useParams();
@@ -33,7 +35,15 @@ const ModelSpace = () => {
   return (
     <div className="model-space">
       <div className="model-space-container">
-        <h1>Model Space</h1>
+        <div className="model-space-content">
+          <ModelCard
+            name={data?.name}
+            description={data?.description}
+            avatar={data?.avatar}
+          />
+
+          <ModelForm />
+        </div>
       </div>
     </div>
   );
