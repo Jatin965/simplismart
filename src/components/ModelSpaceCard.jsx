@@ -3,7 +3,7 @@ import BlockedImg from "../assets/ms3.jpg";
 
 const ModelSpaceCard = ({ modelSpace }) => {
   return (
-    <div className="model-space-card">
+    <div className="model-space-card" data-modelid={modelSpace.id}>
       <div className="model-space-card-container">
         <div className="img-wrapper">
           <img

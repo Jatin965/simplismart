@@ -10,7 +10,7 @@
         gap: 1rem;
 
         & > .model-space-card {
-          flex: 1 1 30%;
+          flex: 1 1 29%;
         }
       }
     }
@@ -23,4 +23,44 @@
   padding: 1rem;
   border-radius: 0.5rem;
   color: $theme-text-white;
+  cursor: pointer;
+  border: 1px solid black;
+  transition: all 0.3s ease;
+
+  &:hover {
+    border: 1px solid $theme-blue;
+    box-shadow: 0 0 20px $theme-blue;
+  }
+
+  &-container {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+
+    .img-wrapper {
+      background-color: $theme-black;
+      border-radius: 0.5rem;
+      height: 3.75rem;
+      img {
+        width: 3.75rem;
+        object-fit: cover;
+        border-radius: 0.5rem;
+      }
+    }
+
+    .card-details {
+      h2 {
+        margin: 0;
+        font-weight: 600;
+        color: $theme-white;
+      }
+      p {
+        display: -webkit-box;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+      }
+    }
+  }
 }
