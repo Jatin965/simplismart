@@ -5,12 +5,13 @@
 
     .model-card {
       background: $theme-card;
-      padding: 1rem;
+      padding: 2rem;
       border-radius: 0.5rem;
       color: $theme-text-white;
       cursor: pointer;
       border: 1px solid black;
       transition: all 0.3s ease;
+
       &-container {
         display: flex;
         align-items: flex-start;
@@ -20,6 +21,7 @@
           background-color: $theme-black;
           border-radius: 0.5rem;
           height: 5.75rem;
+
           img {
             width: 5.75rem;
             object-fit: cover;
@@ -33,12 +35,106 @@
             font-weight: 600;
             color: $theme-white;
           }
+        }
+      }
+    }
+
+    .model-form-output {
+      display: flex;
+      gap: 2rem;
+      margin-top: 2rem;
+
+      .model-form {
+        flex: 1;
+        background: $theme-card;
+        padding: 2rem;
+        border-radius: 0.5rem;
+        border: 1px solid black;
+
+        .form-group {
+          margin-bottom: 1rem;
+
+          label {
+            display: block;
+            color: $theme-text-white;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+          }
+
+          .form-control {
+            width: calc(100% - 2rem);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            border: 1px solid $theme-black;
+            background-color: $theme-black;
+            color: $theme-text-white;
+            outline: none;
+
+            &:focus,
+            &:focus-within {
+              border-color: $theme-blue;
+            }
+          }
+
           p {
-            display: -webkit-box;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            -webkit-line-clamp: 3;
-            -webkit-box-orient: vertical;
+            margin-top: 0.25rem;
+            color: $theme-text-white;
+            font-size: 0.875rem;
+          }
+        }
+
+        .submit-btn {
+          padding: 0.5rem 1rem;
+          background-color: $theme-blue;
+          color: $theme-white;
+          border: none;
+          border-radius: 0.5rem;
+          cursor: pointer;
+          transition: background-color 0.3s ease;
+
+          &:hover {
+            background-color: $theme-blue-two;
+          }
+        }
+      }
+
+      .model-output {
+        flex: 1;
+        background: $theme-card;
+        padding: 1rem;
+        border-radius: 0.5rem;
+        border: 1px solid black;
+        overflow-y: auto;
+        max-height: 400px;
+
+        .error {
+          color: red;
+        }
+
+        .output-group {
+          margin-bottom: 1rem;
+
+          label {
+            display: block;
+            color: $theme-text-white;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+          }
+
+          .output-text {
+            width: 100%;
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            border: 1px solid $theme-black;
+            background-color: $theme-black;
+            color: $theme-text-white;
+            resize: none;
+          }
+
+          .output-image {
+            width: 100%;
+            border-radius: 0.5rem;
+            object-fit: contain;
           }
         }
       }

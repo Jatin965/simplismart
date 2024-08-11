@@ -11,8 +11,6 @@ const ModelSpace = () => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  console.log("modelId", modelId);
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -31,19 +29,25 @@ const ModelSpace = () => {
     if (modelId) fetchData();
   }, [modelId]);
 
-  console.log("data", data);
   return (
     <div className="model-space">
       <div className="model-space-container">
-        <div className="model-space-content">
-          <ModelCard
-            name={data?.name}
-            description={data?.description}
-            avatar={data?.avatar}
-          />
-
-          <ModelForm />
-        </div>
+        {loading && <p>Loading...</p>}
+        {error && <p className="error">{error}</p>}
+        {data && (
+          <div className="model-space-content">
+            <ModelCard
+              name={data.name}
+              description={data.description}
+              avatar={data.avatar}
+            />
+            <ModelForm
+              inputs={data.inputs || []}
+              outputs={data.outputs || []}
+              modelId={modelId}
+            />
+          </div>
+        )}
       </div>
     </div>
   );
